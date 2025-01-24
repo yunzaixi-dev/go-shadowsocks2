@@ -17,4 +17,10 @@ RUN apk upgrade \
 
 COPY --from=builder /go/bin/go-shadowsocks2 /usr/bin/shadowsocks
 
+# Expose shadowsocks server port
+EXPOSE 10800/tcp
+EXPOSE 10800/udp
+
+# Set default command to run as server
 ENTRYPOINT ["shadowsocks"]
+CMD ["-s", "ss://AEAD_CHACHA20_POLY1305:xi207760@:10800"]
